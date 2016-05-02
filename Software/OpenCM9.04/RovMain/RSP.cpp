@@ -11,21 +11,12 @@
 //
 //    파일명     	: RSP.cpp
 //----------------------------------------------------------------------------
-
-
-
-
 #include <Arduino.h> 
 
 #include "RSP.h"
 
-
-
-
 #define RSP_CMD_STX							0x02
 #define RSP_CMD_ETX							0x03
-
-
 
 #define RSP_CMD_STATE_WAIT_STX				0
 #define RSP_CMD_STATE_WAIT_CMD				1
@@ -34,10 +25,7 @@
 #define RSP_CMD_STATE_WAIT_CHECKSUM			4
 #define RSP_CMD_STATE_WAIT_ETX				5
 
-
-
 #define _USE_DEBUG		
-
 
 /*---------------------------------------------------------------------------
      TITLE   : RSP
@@ -50,10 +38,6 @@ RSP::RSP()
 	Cmd_State = RSP_CMD_STATE_WAIT_STX;
 }
 
-
-
-
-
 /*---------------------------------------------------------------------------
      TITLE   : begin
      WORK    : 
@@ -65,10 +49,6 @@ void RSP::begin( uint32_t Baud )
 	RSP_SERIAL.begin(Baud);	
 }
 
-
-
-
-
 /*---------------------------------------------------------------------------
      TITLE   : update
      WORK    : 
@@ -79,7 +59,6 @@ bool RSP::update( void )
 {
 	bool    Ret = false;
 	uint8_t ch;
-
 
 	//-- 명령어 수신
 	//
@@ -106,8 +85,6 @@ bool RSP::update( void )
 		PreviousTime = CurrentTime;
 	}	
 
-
-
 	//-- 명령어 상태
 	//
 	switch( Cmd_State )
@@ -127,7 +104,6 @@ bool RSP::update( void )
 			}
 			break;
 
-
 		//-- 명령어 기다리는 상태 
 		//
 		case RSP_CMD_STATE_WAIT_CMD:
@@ -136,7 +112,6 @@ bool RSP::update( void )
 			Cmd_State = RSP_CMD_STATE_WAIT_SIZE;
 			//Serial.println("CMD");
 			break;
-
 
 		//-- 데이터 사이즈 기다리는 상태(128까지)
 		//
@@ -162,7 +137,6 @@ bool RSP::update( void )
 			}
 			break;
 
-
 		//-- 데이터를 기다리는 상태
 		//
 		case RSP_CMD_STATE_WAIT_DATA:
@@ -180,7 +154,6 @@ bool RSP::update( void )
 			} 
 			break;
 
-
 		//-- 체크섬을 기다리는 상태
 		//
 		case RSP_CMD_STATE_WAIT_CHECKSUM:
@@ -190,7 +163,6 @@ bool RSP::update( void )
 			Cmd.CheckSumRecv = ch;
 			Cmd_State        = RSP_CMD_STATE_WAIT_ETX;		
 			break;
-
 
 		//-- ETX 기다리는 상태
 		//
@@ -218,9 +190,6 @@ bool RSP::update( void )
 }
 
 
-
-
-
 /*---------------------------------------------------------------------------
      TITLE   : Get_CmdPtr
      WORK    : 
@@ -232,10 +201,6 @@ RSP_CMD_OBJ *RSP::Get_CmdPtr( void )
 	return &Cmd;
 }
 
-
-
-
-
 /*---------------------------------------------------------------------------
      TITLE   : Get_RespPtr
      WORK    : 
@@ -246,10 +211,6 @@ RSP_RESP_OBJ *RSP::Get_RespPtr( void )
 {
 	return &Resp;
 }
-
-
-
-
 
 /*---------------------------------------------------------------------------
      TITLE   : SendReap
