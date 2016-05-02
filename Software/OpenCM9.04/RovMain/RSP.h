@@ -17,13 +17,9 @@
 #include <inttypes.h>
 #include <Arduino.h> 
 
-
 #define RSP_SERIAL	Serial1
 
-
 #define RSP_CMD_MAX_LENGTH			128
-
-
 
 typedef struct 
 {
@@ -34,7 +30,6 @@ typedef struct
 	uint8_t	Data[RSP_CMD_MAX_LENGTH];	
 } RSP_CMD_OBJ;
 
-
 typedef struct 
 {
 	uint8_t	Cmd;
@@ -43,14 +38,10 @@ typedef struct
 	uint8_t	Data[RSP_CMD_MAX_LENGTH];	
 } RSP_RESP_OBJ;
 
-
-
-
 class RSP
 {
 public:
 	RSP();
-
 
 	RSP_CMD_OBJ		Cmd;
 	RSP_RESP_OBJ	Resp;
@@ -71,6 +62,5 @@ private:
 	uint32_t CurrentTime;
 	uint32_t PreviousTime;
 };
-
 
 #endif
