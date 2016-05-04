@@ -39,14 +39,12 @@ class Command{
   private :
     Servo   RovMotor[3];
     RSP     RovSerial;
-    int _motor_pin;
-    int _motor_name;
     uint16_t baudrate;
   public :
     Command();
     uint16_t _motor_pwm;
     void RovSerial_begin(uint16_t baudrate);
-    void RovMotor_init(int _motor_pin, int _motor_name);  //모터 초기화
+    void RovMotor_init();  //모터 초기화
     void process_recv_cmd( void );  //명령 수신 프로세스
     void send_cmd_info( void );   //수신 명령어 정보 송신
     void recv_cmd_control( RSP_CMD_OBJ *pCmd );  //LED, Motor 제어 명령
