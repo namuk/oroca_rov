@@ -35,10 +35,14 @@ void Command::RovSerial_begin(uint16_t baudrate)
      ARG     : void
      RET     : void
 ---------------------------------------------------------------------------*/
-void Command::RovMotor_init(int _motor_pin, int _motor_name)
+void Command::RovMotor_init()
 {
-   RovMotor[_motor_name].attach(_motor_pin, 1000, 2000, 0, 255 );
-   RovMotor[_motor_name].writeMicroseconds(MOTOR_NEUTRAL);
+   RovMotor[RC_MOTOR_L].attach(RC_MOTOR_PIN_L, 1000, 2000, 0, 255 );
+   RovMotor[RC_MOTOR_L].writeMicroseconds(MOTOR_NEUTRAL);
+   RovMotor[RC_MOTOR_C].attach(RC_MOTOR_PIN_C, 1000, 2000, 0, 255 );
+   RovMotor[RC_MOTOR_C].writeMicroseconds(MOTOR_NEUTRAL);
+   RovMotor[RC_MOTOR_R].attach(RC_MOTOR_PIN_R, 1000, 2000, 0, 255 );
+   RovMotor[RC_MOTOR_R].writeMicroseconds(MOTOR_NEUTRAL);   
 }
 
 /*---------------------------------------------------------------------------
