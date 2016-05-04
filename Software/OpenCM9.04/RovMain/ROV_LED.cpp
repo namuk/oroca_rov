@@ -22,7 +22,7 @@
      ARG     : void
      RET     : void
 ---------------------------------------------------------------------------*/
-void led_setup()
+void Led_setup()
 {
   pinMode(LED_PIN_L, PWM);
   pinMode(LED_PIN_R, PWM);
