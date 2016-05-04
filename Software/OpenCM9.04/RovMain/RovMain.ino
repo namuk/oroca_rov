@@ -21,10 +21,8 @@ void setup()
   Serial.begin(115200);
   RovCommand.RovSerial_begin(115200);
 
-  RovCommand.RovMotor_init(RC_MOTOR_PIN_L, RC_MOTOR_L);
-  RovCommand.RovMotor_init(RC_MOTOR_PIN_C, RC_MOTOR_C);
-  RovCommand.RovMotor_init(RC_MOTOR_PIN_R, RC_MOTOR_R);
-  led_setup();
+  RovCommand.RovMotor_init();
+  Led_setup();
   
   IsConnected = false;
 }
