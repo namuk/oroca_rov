@@ -26,7 +26,7 @@
 
 static uint16_t LED_pwm[2] = {0, 0};
 
-void led_setup();
+void Led_setup();
 
 
 #endif
