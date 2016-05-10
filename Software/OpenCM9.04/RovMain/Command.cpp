@@ -156,4 +156,70 @@ void Command::recv_cmd_control( RSP_CMD_OBJ *pCmd )
   }
 }
 
+/*---------------------------------------------------------------------------
+     TITLE   : IMU_init
+     WORK    : 
+     ARG     : void
+     RET     : void
+---------------------------------------------------------------------------*/
+void Command::IMU_init()
+{
+  err_code = IMU.begin();
+}
 
+/*---------------------------------------------------------------------------
+     TITLE   : recv_status_IMU
+     WORK    : 
+     ARG     : void
+     RET     : void
+---------------------------------------------------------------------------*/
+void Command::recv_status_IMU()
+{
+  IMU.update();
+}
+
+/*---------------------------------------------------------------------------
+     TITLE   : sout_status_IMU
+     WORK    : 
+     ARG     : void
+     RET     : void
+---------------------------------------------------------------------------*/
+void Command::sout_status_IMU()
+{
+    Serial.print(err_code);
+    Serial.print(" ");
+    Serial.print(IMU.angle[0]/10);
+    Serial.print(" ");
+    Serial.print(IMU.angle[1]/10);
+    Serial.print(" ");
+    Serial.println(IMU.angle[2]);
+}
+
+
+/*---------------------------------------------------------------------------
+     TITLE   : cali_acc_IMU
+     WORK    : 
+     ARG     : void
+     RET     : void
+---------------------------------------------------------------------------*/
+void Command::cali_acc_IMU()
+{
+if( Serial.available() )
+  {
+    char Ch = Serial.read();
+
+    if( Ch == '1' )
+    {
+      Serial.println("ACC Cali Start");
+
+      IMU.SEN.acc_cali_start();
+      while( IMU.SEN.acc_cali_get_done() == false )
+      {
+        IMU.update();
+        //Serial.println( IMU.SEN.calibratingA );
+      }
+
+      Serial.print("ACC Cali End ");
+    }
+  }
+}
