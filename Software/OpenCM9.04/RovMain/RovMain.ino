@@ -33,6 +33,7 @@ void loop()
 
   //-- 명령어 수신 처리 
   RovCommand.process_recv_cmd();
+  RovCommand.recv_status_IMU();
 
   //-- 100ms마다 ROV정보 전달
   if( (tTime[0] - millis()) >= 100 )
@@ -44,8 +45,11 @@ void loop()
     if( IsConnected == true )
     {
       Serial.println("Connected");
+      RovCommand.sout_status_IMU();
     }
   }
+
+  void cali_acc_IMU();
 
   //-- 연결이 끊어진 상태 
 /* 
