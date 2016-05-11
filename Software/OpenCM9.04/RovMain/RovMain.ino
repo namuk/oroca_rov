@@ -22,34 +22,28 @@ void setup()
   RovCommand.RovSerial_begin(115200);
 
   RovCommand.RovMotor_init();
+  RovCommand.IMU_init();
   Led_setup();
-  
+ 
   IsConnected = false;
 }
 
 void loop() 
 {
-  static uint32_t tTime[8];
+  static uint32_t tTime[3];
 
-  //-- 명령어 수신 처리 
-  RovCommand.process_recv_cmd();
   RovCommand.recv_status_IMU();
-
+  RovCommand.process_recv_cmd();
+  
   //-- 100ms마다 ROV정보 전달
-  if( (tTime[0] - millis()) >= 100 )
+  if( (millis() - tTime[1]) >= 200 )
   {
-    tTime[0] = millis();
-
+    tTime[1] = millis();
+   
+    RovCommand.sout_status_IMU(); 
     RovCommand.send_cmd_info();
-
-    if( IsConnected == true )
-    {
-      Serial.println("Connected");
-      RovCommand.sout_status_IMU();
-    }
   }
-
-  void cali_acc_IMU();
+  RovCommand.cali_acc_IMU();
 
   //-- 연결이 끊어진 상태 
 /* 
