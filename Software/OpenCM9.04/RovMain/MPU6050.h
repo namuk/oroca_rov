@@ -22,7 +22,6 @@
 #define YAW     2
 
 
-
 #define ACC_1G 512
 #define GYRO_SCALE (4 / 16.4 * PI / 180.0 / 1000000.0) //16.4 LSB = 1 deg/s
 
