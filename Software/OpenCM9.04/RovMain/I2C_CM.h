@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------------
-//    프로그램명 	: I2C
+//    프로그램명 	: IMU
 //
-//    만든이     	: Cho Han Cheol 
+//    만든이     	: Made by Baram ( chcbaram@paran.com )
 //
 //    날  짜     : 
 //    
@@ -9,52 +9,43 @@
 //
 //    MPU_Type	: 
 //
-//    파일명     	: I2C.h
+//    파일명     	: IMU.h
 //----------------------------------------------------------------------------
-         
-
-#ifndef _I2C_CM_H_
-#define _I2C_CM_H_
+#ifndef _IMU_H_
+#define _IMU_H_
 
 #include <inttypes.h>
 #include <Arduino.h> 
 
+#include "MPU6050.h"
 
 
+#define IMU_OK			0x00
+#define IMU_ERR_I2C		0x01
 
-class cI2C
+class cIMU
 {
 
-public:	
-	uint8_t rawADC[6];
-	int16_t i2c_errors_count = 0;
+public:
+	cMPU6050 SEN;
+
+	int16_t accZ;
+	int16_t angle[3];
+	int16_t gyroData[3];
+
+	bool bConnected;
 
 public:
-	cI2C();
+	cIMU();
 
-	void begin( void );
+	uint8_t  begin( void );
+	uint16_t update( uint32_t priod_us = 5000 );
 
-	void rep_start(uint8_t address);
-	void stop(void);
-	void write(uint8_t data );
-
-	uint8_t read_ack(void);
-	uint8_t read_nak(void);
-
-	void read_reg_to_buf(uint8_t add, uint8_t reg, uint8_t *buf, uint8_t size);
-	void get_six_raw_adc(uint8_t add, uint8_t reg);
-	void write_reg(uint8_t add, uint8_t reg, uint8_t val);
-
-	uint8_t read_reg(uint8_t add, uint8_t reg);
-
-private:
-	
-
+private:	
+	void computeIMU( void );
+	void getEstimatedAttitude( void );
 
 };
-
-
-extern cI2C	I2C;
 
 
 #endif
