@@ -23,9 +23,9 @@ Command::Command(){};
      ARG     : void
      RET     : void
 ---------------------------------------------------------------------------*/
-void Command::RovSerial_begin(uint16_t baudrate)
+void Command::RovSerial_begin(uint32_t _baudrate)
 {
-    RovSerial.begin(baudrate); 
+    RovSerial.begin(_baudrate); 
 }
 
 
