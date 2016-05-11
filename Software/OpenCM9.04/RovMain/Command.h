@@ -31,21 +31,22 @@
 
 #define MOTOR_NEUTRAL 1488
 
-static uint16_t Motor_pwm[3] = {MOTOR_NEUTRAL,MOTOR_NEUTRAL,MOTOR_NEUTRAL};
 ////////////////////////////////
 
 static bool    IsConnected;
-static uint8_t   err_code;
 
 class Command{
   private :
+    uint32_t _baudrate;
+  public : 
     Servo   RovMotor[3];
     RSP     RovSerial;
     cIMU    IMU;
-    uint16_t baudrate;
+    uint16_t Motor_pwm[3] = {MOTOR_NEUTRAL,MOTOR_NEUTRAL,MOTOR_NEUTRAL};
+    uint8_t   err_code;
   public :
     Command();
-    void RovSerial_begin(uint16_t baudrate);
+    void RovSerial_begin(uint32_t _baudrate);
     void RovMotor_init();  //모터 초기화
     void process_recv_cmd( void );  //명령 수신 프로세스
     void send_cmd_info( void );   //수신 명령어 정보 송신
