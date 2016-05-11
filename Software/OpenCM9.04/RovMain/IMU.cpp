@@ -15,18 +15,10 @@
 	Based on Multiwii : https://github.com/multiwii/multiwii-firmware
 */
 
-
-
 #include <Arduino.h> 
 #include <EEPROM.h>
 #include "IMU.h"
 #include "I2C_CM.h"
-
-
-
-
-
-
 
 //******  advanced users settings *******************
 /* Set the Low Pass Filter factor for ACC
